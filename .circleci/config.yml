@@ -30,7 +30,7 @@ jobs: # a collection of steps
         environment: # environment variables for database
           POSTGRES_USER: ppelink
           POSTGRES_DB: ppe_test
-          POSTGRES_PASSWORD: ""
+          POSTGRES_PASSWORD: $POSTGRES_PASSWORD
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
 
