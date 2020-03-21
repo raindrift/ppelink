@@ -1,0 +1,56 @@
+module.exports = {
+  'ignorePatterns': ['vendor/'],
+  'env': {
+    'jest': true
+  },
+  parser: '@typescript-eslint/parser',
+  'extends': [
+    'airbnb-base',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:promise/recommended'
+  ],
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "16.10"
+    }
+  },
+  'plugins': ['@typescript-eslint', 'promise'],
+  'rules': {
+    'semi': ['error', 'always'],
+    'comma-dangle': ['error', 'never'],
+    'quote-props': ['error', 'as-needed', { 'numbers': true }],
+    'no-cond-assign': ['error', 'always'],
+    'no-else-return': ["error", { allowElseIf: true }],
+    'no-underscore-dangle': ['error', { 'allow': ['__typename', '__STORE__'] }],
+    'react/jsx-fragments': [0],
+    'react/jsx-one-expression-per-line': [0],
+    'react/prefer-stateless-function': [0],
+    'react/prop-types': [0],
+    'react/button-has-type': [0],
+    'import/no-extraneous-dependencies': ['error', { 'devDependencies': ['**/*.spec.js', '**/*.stories.js'] }]
+  },
+  'globals': {
+    'document': false,
+    'describe': false,
+    'it': false,
+    'beforeEach': false,
+    'afterEach': false,
+    'fetch': false,
+    'sinon': false,
+    'window': false,
+    'Headers': false,
+    'Image': false,
+    'MutationObserver': false,
+    'TimeoutID': true,
+    'IntervalID': true,
+    'Audio': true,
+    'URL': true,
+    'jest': true,
+    'FormData': true,
+    'localStorage': false,
+    '$': false,
+    'File': false
+  }
+};
