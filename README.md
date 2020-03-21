@@ -57,3 +57,5 @@ Initialize the db
 ## Starting the server
 * `./bin/webpack-dev-server`
 * `rails s`
+
+If you get a segfault in `sassc`, just try again. It seems to be an asset compilation issue, but it works on the second try.

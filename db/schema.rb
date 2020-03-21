@@ -10,9 +10,58 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2020_03_21_232053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "auth_tokens", force: :cascade do |t|
+    t.integer "contact_id", null: false
+    t.string "token", null: false
+    t.integer "use_count", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["token"], name: "index_auth_tokens_on_token", unique: true
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "title"
+    t.string "phone"
+    t.string "email"
+    t.string "phone_confirmation_code"
+    t.string "email_confirmation_code"
+    t.boolean "phone_confirmed", default: false, null: false
+    t.boolean "email_confirmed", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_contacts_on_email"
+    t.index ["phone"], name: "index_contacts_on_phone"
+  end
+
+  create_table "organizations", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "organization_type", null: false
+    t.string "address", null: false
+    t.string "address2", null: false
+    t.string "city", null: false
+    t.string "state"
+    t.string "postcode", null: false
+    t.string "country", default: "USA", null: false
+    t.string "delivery_instructions"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["latitude", "longitude"], name: "index_organizations_on_latitude_and_longitude"
+    t.index ["organization_type"], name: "index_organizations_on_organization_type"
+  end
+
+  create_table "organizations_contacts", force: :cascade do |t|
+    t.integer "organization_id", null: false
+    t.integer "contact_id", null: false
+    t.index ["contact_id", "organization_id"], name: "index_organizations_contacts_on_contact_id_and_organization_id"
+    t.index ["organization_id"], name: "index_organizations_contacts_on_organization_id"
+  end
 
 end

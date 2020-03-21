@@ -86,6 +86,12 @@ GEM
       dotenv (= 2.7.5)
       railties (>= 3.2, < 6.1)
     erubi (1.9.0)
+    factory_bot (5.1.1)
+      activesupport (>= 4.2.0)
+    factory_bot_rails (5.1.1)
+      factory_bot (~> 5.1.0)
+      railties (>= 4.2.0)
+    ffaker (2.14.0)
     ffi (1.12.2)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -255,8 +261,12 @@ GEM
       builder (>= 2.1.2)
       jwt (~> 1.0)
       multi_json (>= 1.3.0)
+    twilio-test-toolkit (3.4.0)
+      capybara
+      uuidtools
     tzinfo (1.2.6)
       thread_safe (~> 0.1)
+    uuidtools (2.1.5)
     web-console (4.0.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -286,6 +296,8 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   dotenv-rails
+  factory_bot_rails
+  ffaker
   jbuilder (~> 2.7)
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)
@@ -300,6 +312,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
   twilio-ruby (~> 4.2.1)
+  twilio-test-toolkit
   tzinfo-data
   web-console (>= 3.3.0)
   webdrivers
