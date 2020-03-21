@@ -1,4 +1,5 @@
-version: 2.1 # use CircleCI 2.0
+version: 2.1
+
 orbs:
   heroku: circleci/heroku@0.0.10. # Invoke the Heroku orb
 
@@ -12,6 +13,7 @@ workflows:
           filters:
             branches:
               only: master
+
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
     parallelism: 3 # run three instances of this job in parallel
