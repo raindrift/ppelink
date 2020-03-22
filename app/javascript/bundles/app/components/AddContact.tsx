@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { Grid, FormGroup } from '@material-ui/core';
+import { Grid, FormGroup, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 type Props = any;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    margin: theme.spacing(1)
+    marginBottom: theme.spacing(2)
   }
 }));
 
@@ -38,6 +38,9 @@ export default function SignupOrganization({ takeAction, newOrganization }) {
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} lg={4}>
+        <Typography variant="h3" className={classes.root}>
+          Add Contact Info
+        </Typography>
         <form noValidate autoComplete="off">
           <FormGroup className={classes.root}>
             <TextField id="contact_name" label="Your Name" variant="outlined"

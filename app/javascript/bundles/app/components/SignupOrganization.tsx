@@ -3,14 +3,14 @@ import { useLocation, Link } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { FormGroup, Grid } from '@material-ui/core';
+import { FormGroup, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 type Props = any;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    margin: theme.spacing(1)
+    marginBottom: theme.spacing(2)
   }
 }));
 
@@ -45,11 +45,15 @@ export default function SignupOrganization({ takeAction, newOrganization }) {
     takeAction('rememberNewOrg', newOrg); // put in app state so this persists while navigating
   };
 
-  const nameLabel = type === 'hospital' ? 'Hospital Name' : 'Company Name';
+  const isHospital = type === 'hospital';
+  const nameLabel = isHospital ? 'Hospital Name' : 'Company Name';
 
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} lg={4}>
+        <Typography variant="h3" className={classes.root}>
+          {isHospital ? 'Hospital Sign Up' : 'Donor Sign Up'}
+        </Typography>
         <form noValidate autoComplete="off">
           <FormGroup className={classes.root}>
             <TextField id="name" label={nameLabel} variant="outlined"
