@@ -56,7 +56,7 @@ export default function SignupOrganization({ takeAction, newOrganization }) {
         </ListItem>
         <ListItem>
           <Button component={Link} variant="contained" color="primary"
-                  to={`/${newOrganization.organization_type}_signup`}>
+                  to={`/${newOrganization.organizationType}_signup`}>
             Prev &lt;&lt;
           </Button>
         </ListItem>
