@@ -54,6 +54,14 @@ Initialize the db
 
     rake db:create db:migrate
 
+## .env
+To make the app work, you will need a `.env` file with all the development settings. Variables that go in there are:
+
+    TWILIO_ACCOUNT_SID
+    TWILIO_AUTH_TOKEN
+    MAIN_NUMBER
+
+
 ## Starting the server
 * `./bin/webpack-dev-server`
 * `rails s`
