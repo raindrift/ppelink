@@ -9,6 +9,10 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
+import {
+  DONOR_SIGN_UP_PATH,
+  HOSPITAL_SIGN_UP_PATH
+} from '../../constants/routes';
 
 const useStyles = makeStyles((theme) => ({
   center: {
@@ -28,7 +32,7 @@ export default function Home() {
               component={Link}
               value="Hospital"
               label="Hospital"
-              to="/hospital_signup"
+              to={HOSPITAL_SIGN_UP_PATH}
               aria-label="Hospital"
               endIcon={<LocalHospitalIcon />}
             >
@@ -44,7 +48,7 @@ export default function Home() {
               component={Link}
               value="Donor"
               label="Donor"
-              to="/donor_signup"
+              to={DONOR_SIGN_UP_PATH}
               aria-label="Donor"
               endIcon={<PeopleAltIcon />}
             >

@@ -1,12 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import { Grid, FormGroup, Typography } from '@material-ui/core';
+import { Redirect, Link } from 'react-router-dom';
+import {
+  Grid,
+  FormGroup,
+  Typography,
+  Button,
+  TextField
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-
-type Props = any;
+import { HOME_PATH } from '../../constants/routes';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,8 +16,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function SignupOrganization({ takeAction, newOrganization }) {
+export default function AddContact({ takeAction, newOrganization }) {
   const classes = useStyles();
+
+  if (!newOrganization) {
+    return (<Redirect to={HOME_PATH} />);
+  }
 
   const [newContact, setNewContact] = React.useState({
     name: '',

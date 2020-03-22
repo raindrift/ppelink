@@ -82,8 +82,19 @@ export default function SignupOrganization({ takeAction, newOrganization }) {
                        value={newOrg.country} onChange={handleFormChange} />
           </FormGroup>
           <FormGroup className={classes.root}>
-            <Button component={Link} variant="contained" color="primary"
-                    to="/add_contact">
+            <Button
+              component={Link}
+              variant="contained"
+              color="primary"
+              to="/add_contact"
+              disabled={
+                !newOrg.name
+                || !newOrg.address1
+                || !newOrg.city
+                || !newOrg.postcode
+                || !newOrg.country
+              }
+            >
               Next &gt;&gt;
             </Button>
           </FormGroup>
