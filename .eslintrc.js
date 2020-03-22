@@ -31,7 +31,8 @@ module.exports = {
     'react/prop-types': [0],
     'react/button-has-type': [0],
     'import/no-extraneous-dependencies': ['error', {'devDependencies': ['**/*.spec.js']}],
-    'import/extensions': ['error', 'never']
+    'import/extensions': ['error', 'never'],
+    '@typescript-eslint/ban-ts-ignore': [0]
   },
   'globals': {
     'document': false,

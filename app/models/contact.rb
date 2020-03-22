@@ -21,4 +21,11 @@ class Contact < ApplicationRecord
     phone_confirmed || email_confirmed
   end
 
+  def as_json(options = nil)
+    {
+      id: id,
+      name: name
+    }
+  end
+
 end

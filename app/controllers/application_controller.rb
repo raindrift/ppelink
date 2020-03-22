@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include ApiConventionsHelper
+
   def current_contact
     @current_contact ||= Contact.find(session[:contact_id]) if session[:contact_id]
   end

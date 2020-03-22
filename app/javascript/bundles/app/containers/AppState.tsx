@@ -8,6 +8,11 @@ declare global {
   }
 }
 
+const getCsrfToken = () => {
+  const csrfToken: any = document.getElementsByName('csrf-token')[0];
+  return csrfToken ? csrfToken.content : '';
+};
+
 async function apiRequest(method, path, body = null) {
   // comment this out to reduce console spam
   console.log('apiRequest', { method, path, body });
@@ -15,7 +20,8 @@ async function apiRequest(method, path, body = null) {
     method,
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json;charset=UTF-8'
+      'Content-Type': 'application/json;charset=UTF-8',
+      'X-CSRF-Token': getCsrfToken()
     },
     body: body ? JSON.stringify(body) : undefined
   });
@@ -59,12 +65,14 @@ const actions = {
     this.setState({
       loading: true
     });
-    const { error } = await apiRequest('post', '/confirm', {
+    const { contact, organization } = await apiRequest('post', '/confirm', {
       contact: newContact,
       organization: newOrganization
     });
     this.setState({
-      loading: false
+      loading: false,
+      newContact: contact,
+      newOrganization: organization
     });
   },
 
@@ -105,7 +113,7 @@ export default class AppState extends Component<{ children?: any }, any> {
   takeAction = (action, ...args) => {
     // console.log('[action]', action, args)
     if (!(action in actions)) throw new Error(`unkown action ${action}`);
-    actions[action].apply(this, args).catch((error) => {
+    return actions[action].apply(this, args).catch((error) => {
       console.error('[action]', action, error);
       this.setState({
         [`action:${action}:error`]: error
