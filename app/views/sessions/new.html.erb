@@ -1,0 +1,24 @@
+<div>
+  <h1>Enter your phone number</h1>
+
+  <%= form_tag '/login_by_sms' do %>
+    <%= text_field_tag :number, nil, placeholder: 'xxx-xxx-xxxx', type: 'tel', pattern: '[\d-()]*' %>
+    <%= submit_tag "Next >>", class: 'btn btn-primary' %>
+  <% end %>
+</div>
+
+<!--
+<button style="margin-top: 100px" class="btn btn-secondary btn-small" type="button" data-toggle="collapse" data-target="#login-form" aria-expanded="false" aria-controls="login-form">Staff Login</button>
+
+<div style="margin-top: 20px;" class="collapse multi-collapse" id="login-form">
+  <div class="card card-body">
+    <%= form_tag '/login' do %>
+
+      <div>Username: <%= text_field_tag :username %></div>
+      <div>Password: <%= password_field_tag :password %></div>
+      <div><%= submit_tag "Submit" %></div>
+
+    <% end %>
+  </div>
+</div>
+ -->

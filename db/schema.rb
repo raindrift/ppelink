@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_21_232053) do
+ActiveRecord::Schema.define(version: 2020_03_22_031250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,11 +39,18 @@ ActiveRecord::Schema.define(version: 2020_03_21_232053) do
     t.index ["phone"], name: "index_contacts_on_phone"
   end
 
+  create_table "contacts_organizations", force: :cascade do |t|
+    t.integer "organization_id", null: false
+    t.integer "contact_id", null: false
+    t.index ["contact_id", "organization_id"], name: "index_contacts_organizations_on_contact_id_and_organization_id"
+    t.index ["organization_id"], name: "index_contacts_organizations_on_organization_id"
+  end
+
   create_table "organizations", force: :cascade do |t|
     t.string "name", null: false
     t.integer "organization_type", null: false
     t.string "address", null: false
-    t.string "address2", null: false
+    t.string "address2"
     t.string "city", null: false
     t.string "state"
     t.string "postcode", null: false
@@ -53,15 +60,10 @@ ActiveRecord::Schema.define(version: 2020_03_21_232053) do
     t.float "longitude"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "active", default: false, null: false
+    t.index ["active"], name: "index_organizations_on_active"
     t.index ["latitude", "longitude"], name: "index_organizations_on_latitude_and_longitude"
     t.index ["organization_type"], name: "index_organizations_on_organization_type"
-  end
-
-  create_table "organizations_contacts", force: :cascade do |t|
-    t.integer "organization_id", null: false
-    t.integer "contact_id", null: false
-    t.index ["contact_id", "organization_id"], name: "index_organizations_contacts_on_contact_id_and_organization_id"
-    t.index ["organization_id"], name: "index_organizations_contacts_on_organization_id"
   end
 
 end

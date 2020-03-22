@@ -1,20 +1,28 @@
 // Libraries
 import React from 'react';
 import {
-  BrowserRouter as Router,
   Switch,
   Route
 } from 'react-router-dom';
 
 // Components
-import Home from '../components/home';
+import Home from '../components/Home';
+import Signup from '../components/Signup';
 
-export default () => (
-  <Router>
-    <Switch>
-      <Route path="/">
-        <Home />
-      </Route>
-    </Switch>
-  </Router>
+export default (props) => (
+  <Switch>
+
+    <Route exact path="/">
+      <Home {...props} />
+    </Route>
+
+    <Route exact path="/hospital_signup">
+      <Signup {...props} />
+    </Route>
+
+    <Route exact path="/donor_signup">
+      <Signup {...props} />
+    </Route>
+
+  </Switch>
 );
