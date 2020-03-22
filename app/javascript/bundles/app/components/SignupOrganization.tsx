@@ -6,8 +6,6 @@ import TextField from '@material-ui/core/TextField';
 import { FormGroup, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-type Props = any;
-
 const useStyles = makeStyles((theme) => ({
   root: {
     marginBottom: theme.spacing(2)
