@@ -1,26 +1,26 @@
-import React, { Component } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import AppRouter from "../routes/AppRouter";
+import React, { Component } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import { Container } from '@material-ui/core';
+
+import AppRouter from '../routes/AppRouter';
 
 const useStyles = makeStyles({
   Layout: {
-    width: "100vw",
-    display: "flex",
-    flexDirection: "column"
+    width: '100vw',
+    display: 'flex',
+    flexDirection: 'column'
   },
   Page: {
-    flex: "1 1",
-    overflow: "auto"
+    flex: '1 1',
+    overflow: 'auto'
   }
 });
 
-export default function Layout(props) {
+export default function Layout(props): JSX.Element {
   const classes = useStyles();
   return (
-    <div className={classes.Layout}>
-      <div className={classes.Page}>
-        <AppRouter {...props} />
-      </div>
-    </div>
+    <Container>
+      <AppRouter {...props} />
+    </Container>
   );
 }

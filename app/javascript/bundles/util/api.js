@@ -3,7 +3,7 @@ import { create } from 'axios';
 class API {
   constructor() {
     this.client = create({
-      baseURL: ('/'),
+      baseURL: ('/')
       // withCredentials: true,
     });
   }

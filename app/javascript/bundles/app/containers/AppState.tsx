@@ -1,52 +1,10 @@
-import React, { Component } from "react";
-import _ from "lodash";
+import React, { Component } from 'react';
+import _ from 'lodash';
 
 declare global {
-    interface Window { getState: any, initialReactState: any; }
-}
-
-export default class AppState extends Component<{children?:any}, any> {
-  constructor(props) {
-    super(props);
-    // for sending state from rails on initial app load
-    this.state = {
-      ...window.initialReactState
-    };
-    window.getState = () => {
-      return this.state;
-    };
-  }
-  // This is for a websocket, if we want it later
-  // componentDidMount() {
-  //   App.cable.subscriptions.create(
-  //     { channel: "ContactChannel" },
-  //     {
-  //       received: message => {
-  //         console.log('received from socket', message)
-  //         this.setState(message);
-  //       },
-  //     }
-  //   );
-  // }
-  updateAppState = newState => {
-    this.setState(newState);
-  };
-  takeAction = (action, ...args) => {
-    //console.log('[action]', action, args)
-    if (!(action in actions)) throw new Error(`unkown action ${action}`);
-    actions[action].apply(this, args).catch(error => {
-      console.error("[action]", action, error);
-      this.setState({
-        [`action:${action}:error`]: error
-      });
-    });
-  };
-  render() {
-    console.dir(this.state);
-    return this.props.children({
-      ...this.state,
-      takeAction: this.takeAction
-    });
+  interface Window {
+    getState: any;
+    initialReactState: any;
   }
 }
 
@@ -56,7 +14,7 @@ const actions = {
   },
 
   async rememberNewOrg(newOrganization) {
-    this.setState({newOrganization});
+    this.setState({ newOrganization });
   },
 
   // this is an example of a put. it doesn't work yet.
@@ -64,7 +22,10 @@ const actions = {
     this.setState({
       loading: true,
     })
-    const {error} = await apiRequest('post', '/confirm', { newContact, newOrganization })
+    const { error } = await apiRequest('post', '/confirm', {
+      newContact,
+      newOrganization
+    })
     this.setState({
       loading: false,
     })
@@ -100,15 +61,63 @@ async function loadResource(options = {}) {
 
 async function apiRequest(method, path, body = null) {
   // comment this out to reduce console spam
-  console.log("apiRequest", { method, path, body });
+  console.log('apiRequest', { method, path, body });
   const response = await fetch(`/api${path}`, {
     method,
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json;charset=UTF-8"
+      Accept: 'application/json',
+      'Content-Type': 'application/json;charset=UTF-8'
     },
     body: body ? JSON.stringify(body) : undefined
   });
-  console.log("apiRequest", { method, path, body, response });
+  console.log('apiRequest', { method, path, body, response });
   return await response.json();
+}
+
+export default class AppState extends Component<{ children?: any }, any> {
+  constructor(props) {
+    super(props);
+    // for sending state from rails on initial app load
+    this.state = {
+      ...window.initialReactState
+    };
+
+    window.getState = () => this.state;
+  }
+
+  // This is for a websocket, if we want it later
+  // componentDidMount() {
+  //   App.cable.subscriptions.create(
+  //     { channel: "ContactChannel" },
+  //     {
+  //       received: message => {
+  //         console.log('received from socket', message)
+  //         this.setState(message);
+  //       },
+  //     }
+  //   );
+  // }
+
+  updateAppState = (newState) => {
+    this.setState(newState);
+  };
+
+  takeAction = (action, ...args) => {
+    // console.log('[action]', action, args)
+    if (!(action in actions)) throw new Error(`unkown action ${action}`);
+    actions[action].apply(this, args).catch((error) => {
+      console.error('[action]', action, error);
+      this.setState({
+        [`action:${action}:error`]: error
+      });
+    });
+  };
+
+  render() {
+    console.dir(this.state);
+    return this.props.children({
+      ...this.state,
+      takeAction: this.takeAction
+    });
+  }
 }

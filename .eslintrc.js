@@ -8,28 +8,30 @@ module.exports = {
     'airbnb-base',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:promise/recommended'
+    'plugin:promise/recommended',
+    'plugin:import/typescript'
   ],
-  "settings": {
-    "react": {
-      "pragma": "React",
-      "version": "16.10"
-    }
+  'settings': {
+    'react': {
+      'pragma': 'React',
+      'version': '16.10'
+    },
+    'import/resolver': {'typescript': {}}
   },
   'plugins': ['@typescript-eslint', 'promise'],
   'rules': {
     'semi': ['error', 'always'],
     'comma-dangle': ['error', 'never'],
-    'quote-props': ['error', 'as-needed', { 'numbers': true }],
+    'quote-props': ['error', 'as-needed', {'numbers': true}],
     'no-cond-assign': ['error', 'always'],
-    'no-else-return': ["error", { allowElseIf: true }],
-    'no-underscore-dangle': ['error', { 'allow': ['__typename', '__STORE__'] }],
+    'no-else-return': ['error', {allowElseIf: true}],
     'react/jsx-fragments': [0],
     'react/jsx-one-expression-per-line': [0],
     'react/prefer-stateless-function': [0],
     'react/prop-types': [0],
     'react/button-has-type': [0],
-    'import/no-extraneous-dependencies': ['error', { 'devDependencies': ['**/*.spec.js', '**/*.stories.js'] }]
+    'import/no-extraneous-dependencies': ['error', {'devDependencies': ['**/*.spec.js']}],
+    'import/extensions': ['error', 'never']
   },
   'globals': {
     'document': false,
