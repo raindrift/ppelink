@@ -36,6 +36,7 @@ export default function AddContact({ takeAction, newOrganization }) {
   };
 
   const handleConfirm = (e) => {
+    takeAction('confirmContact', newOrganization, newContact);
     // send newOrganization and newContact to the backend
     // request auth codes from the user
     // when the user provides them, log them into the app
@@ -49,16 +50,16 @@ export default function AddContact({ takeAction, newOrganization }) {
         </Typography>
         <form noValidate autoComplete="off">
           <FormGroup className={classes.root}>
-            <TextField id="contact_name" label="Your Name" variant="outlined"
+            <TextField id="name" label="Your Name" variant="outlined"
                        value={newContact.name} onChange={handleFormChange} />
           </FormGroup>
           <FormGroup className={classes.root}>
-            <TextField id="contact_phone" label="Mobile Phone Number"
+            <TextField id="phone" label="Mobile Phone Number"
                        variant="outlined" value={newContact.phone}
                        onChange={handleFormChange} />
           </FormGroup>
           <FormGroup className={classes.root}>
-            <TextField id="contact_email" label="Email Address"
+            <TextField id="email" label="Email Address"
                        variant="outlined"
                        value={newContact.email} onChange={handleFormChange} />
           </FormGroup>

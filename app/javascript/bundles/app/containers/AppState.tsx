@@ -8,57 +8,6 @@ declare global {
   }
 }
 
-const actions = {
-  async loadCurrentContact() {
-    await loadResource.call(this, { name: "currentContact" });
-  },
-
-  async rememberNewOrg(newOrganization) {
-    this.setState({ newOrganization });
-  },
-
-  // this is an example of a put. it doesn't work yet.
-  async confirmContact(newContact, newOrganization) {
-    this.setState({
-      loading: true,
-    })
-    const { error } = await apiRequest('post', '/confirm', {
-      newContact,
-      newOrganization
-    })
-    this.setState({
-      loading: false,
-    })
-  },
-
-  // lots of other frontend business logic goes here
-  async resetError() {
-    this.setState({ error: false });
-  }
-};
-
-async function loadResource(options = {}) {
-  let name = options["name"];
-  let endpoint = `/${_.snakeCase(name)}`;
-
-  if (options["id"]) {
-    endpoint = `${endpoint}/${options["id"]}`;
-  }
-  const capitalizedName = `${name[0].toUpperCase()}${name.slice(1)}`;
-  this.setState({
-    [`loading${capitalizedName}`]: true,
-    loading: true,
-    error: undefined
-  });
-  const response = await apiRequest("get", endpoint);
-  this.setState({
-    [`loading${capitalizedName}`]: false,
-    loading: false,
-    error: response.error,
-    [name]: response[name]
-  });
-}
-
 async function apiRequest(method, path, body = null) {
   // comment this out to reduce console spam
   console.log('apiRequest', { method, path, body });
@@ -71,8 +20,59 @@ async function apiRequest(method, path, body = null) {
     body: body ? JSON.stringify(body) : undefined
   });
   console.log('apiRequest', { method, path, body, response });
-  return await response.json();
+  return response.json();
 }
+
+async function loadResource(options: any = {}) {
+  const { id, name } = options;
+  let endpoint = `/${_.snakeCase(name)}`;
+
+  if (id) {
+    endpoint = `${endpoint}/${id}`;
+  }
+  const capitalizedName = `${name[0].toUpperCase()}${name.slice(1)}`;
+  this.setState({
+    [`loading${capitalizedName}`]: true,
+    loading: true,
+    error: undefined
+  });
+  const response = await apiRequest('get', endpoint);
+  this.setState({
+    [`loading${capitalizedName}`]: false,
+    loading: false,
+    error: response.error,
+    [name]: response[name]
+  });
+}
+
+const actions = {
+  async loadCurrentContact() {
+    await loadResource.call(this, { name: 'currentContact' });
+  },
+
+  async rememberNewOrg(newOrganization) {
+    this.setState({ newOrganization });
+  },
+
+  // this is an example of a put. it doesn't work yet.
+  async confirmContact(newOrganization, newContact) {
+    this.setState({
+      loading: true
+    });
+    const { error } = await apiRequest('post', '/confirm', {
+      contact: newContact,
+      organization: newOrganization
+    });
+    this.setState({
+      loading: false
+    });
+  },
+
+  // lots of other frontend business logic goes here
+  async resetError() {
+    this.setState({ error: false });
+  }
+};
 
 export default class AppState extends Component<{ children?: any }, any> {
   constructor(props) {
