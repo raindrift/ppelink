@@ -16,7 +16,7 @@ export default class Home extends PureComponent<Props, DefaultComponentState> {
           component={Link}
           value="Hospital"
           label="Hospital"
-          to={`/hospital_signup`}
+          to="/hospital_signup"
           aria-label="Hospital">
             <LocalHospitalIcon/>
         </IconButton>
@@ -25,7 +25,7 @@ export default class Home extends PureComponent<Props, DefaultComponentState> {
           component={Link}
           value="Donor"
           label="Donor"
-          to={`/donor_signup`}
+          to="/donor_signup"
           aria-label="Donor">
             <PeopleAltIcon/>
         </IconButton>
@@ -33,4 +33,3 @@ export default class Home extends PureComponent<Props, DefaultComponentState> {
     );
   }
 }
-

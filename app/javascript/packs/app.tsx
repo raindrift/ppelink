@@ -1,18 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 
 import AppState from '../bundles/app/containers/AppState';
 import Layout from '../bundles/app/components/Layout';
+
+const customHistory = createBrowserHistory();
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
     <AppState>
       {
         (props) => (
-          <Router>
+          <BrowserRouter history={customHistory}>
             <Layout {...props}/>
-          </Router>
+          </BrowserRouter>
         )
       }
     </AppState>,
