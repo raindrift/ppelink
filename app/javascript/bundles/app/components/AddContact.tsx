@@ -9,7 +9,7 @@ import ListItem from '@material-ui/core/ListItem';
 
 type Props = any;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SignupOrganization({takeAction, newOrganization}) {
+export default function SignupOrganization({ takeAction, newOrganization }) {
   const classes = useStyles();
   const [newContact, setNewContact] = React.useState({
     name: '',
@@ -29,36 +29,41 @@ export default function SignupOrganization({takeAction, newOrganization}) {
   const handleFormChange = (e) => {
     const key = e.target.id;
     newContact[key] = e.target.value;
-    setNewContact({...newContact});
-  }
+    setNewContact({ ...newContact });
+  };
 
   const handleConfirm = (e) => {
     // send newOrganization and newContact to the backend
     // request auth codes from the user
     // when the user provides them, log them into the app
-  }
+  };
 
   return (
     <List>
       <form className={classes.root} noValidate autoComplete="off">
         <ListItem>
-          <TextField id="contact_name" label="Your Name" variant="outlined" value={newContact.name} onChange={handleFormChange} />
+          <TextField id="contact_name" label="Your Name" variant="outlined"
+                     value={newContact.name} onChange={handleFormChange} />
         </ListItem>
         <ListItem>
-          <TextField id="contact_phone" label="Mobile Phone Number" variant="outlined" value={newContact.phone} onChange={handleFormChange} />
+          <TextField id="contact_phone" label="Mobile Phone Number"
+                     variant="outlined" value={newContact.phone}
+                     onChange={handleFormChange} />
         </ListItem>
         <ListItem>
-          <TextField id="contact_email" label="Email Address" variant="outlined" value={newContact.email} onChange={handleFormChange} />
+          <TextField id="contact_email" label="Email Address" variant="outlined"
+                     value={newContact.email} onChange={handleFormChange} />
         </ListItem>
         <ListItem>
-           <Button component={Link} variant="contained" color="primary" to={`/${newOrganization.organization_type}_signup`} >
-             Prev &lt;&lt;
-           </Button>
+          <Button component={Link} variant="contained" color="primary"
+                  to={`/${newOrganization.organization_type}_signup`}>
+            Prev &lt;&lt;
+          </Button>
         </ListItem>
         <ListItem>
-           <Button variant="contained" color="primary" onClick={handleConfirm} >
-             Next &gt;&gt;
-           </Button>
+          <Button variant="contained" color="primary" onClick={handleConfirm}>
+            Next &gt;&gt;
+          </Button>
         </ListItem>
       </form>
     </List>
