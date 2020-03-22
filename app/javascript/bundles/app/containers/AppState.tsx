@@ -4,6 +4,7 @@ import _ from "lodash";
 declare global {
     interface Window { getState: any, initialReactState: any; }
 }
+
 export default class AppState extends Component<{children?:any}, any> {
   constructor(props) {
     super(props);
@@ -48,15 +49,33 @@ export default class AppState extends Component<{children?:any}, any> {
     });
   }
 }
+
 const actions = {
   async loadCurrentContact() {
     await loadResource.call(this, { name: "currentContact" });
   },
+
+  async rememberNewOrg(newOrganization) {
+    this.setState({newOrganization});
+  },
+
+  // this is an example of a put. it doesn't work yet.
+  async confirmContact(newContact, newOrganization) {
+    this.setState({
+      loading: true,
+    })
+    const {error} = await apiRequest('post', '/confirm', { newContact, newOrganization })
+    this.setState({
+      loading: false,
+    })
+  },
+
   // lots of other frontend business logic goes here
   async resetError() {
     this.setState({ error: false });
   }
 };
+
 async function loadResource(options = {}) {
   let name = options["name"];
   let endpoint = `/${_.snakeCase(name)}`;
@@ -78,6 +97,7 @@ async function loadResource(options = {}) {
     [name]: response[name]
   });
 }
+
 async function apiRequest(method, path, body = null) {
   // comment this out to reduce console spam
   console.log("apiRequest", { method, path, body });

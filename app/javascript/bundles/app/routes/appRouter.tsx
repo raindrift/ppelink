@@ -7,7 +7,8 @@ import {
 
 // Components
 import Home from '../components/Home';
-import Signup from '../components/Signup';
+import SignupOrganization from '../components/SignupOrganization';
+import AddContact from '../components/AddContact';
 
 export default (props) => (
   <Switch>
@@ -17,11 +18,15 @@ export default (props) => (
     </Route>
 
     <Route exact path="/hospital_signup">
-      <Signup {...props} />
+      <SignupOrganization {...props} />
     </Route>
 
     <Route exact path="/donor_signup">
-      <Signup {...props} />
+      <SignupOrganization {...props} />
+    </Route>
+
+    <Route exact path="/add_contact">
+      <AddContact {...props} />
     </Route>
 
   </Switch>
