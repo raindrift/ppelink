@@ -1,10 +1,6 @@
 class Contact < ApplicationRecord
   has_and_belongs_to_many :organizations
 
-
-
-
-
   def confirm_email!
     self.update(email_confirmed: true)
 

@@ -9,8 +9,6 @@ class ApiController < ApplicationController
     }
   end
 
-
-
   private
 
   def render_error(error)
