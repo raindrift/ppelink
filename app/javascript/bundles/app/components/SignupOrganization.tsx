@@ -3,18 +3,14 @@ import { useLocation, Link } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import { FormGroup, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
 
 type Props = any;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '25ch'
-    }
+    margin: theme.spacing(1)
   }
 }));
 
@@ -52,43 +48,45 @@ export default function SignupOrganization({ takeAction, newOrganization }) {
   const nameLabel = type === 'hospital' ? 'Hospital Name' : 'Company Name';
 
   return (
-    <List>
-      <form className={classes.root} noValidate autoComplete="off">
-        <ListItem>
-          <TextField id="name" label={nameLabel} variant="outlined"
-                     value={newOrg.name} onChange={handleFormChange} />
-        </ListItem>
-        <ListItem>
-          <TextField id="address1" label="Address Line 1" variant="outlined"
-                     value={newOrg.address1} onChange={handleFormChange} />
-        </ListItem>
-        <ListItem>
-          <TextField id="address2" label="Address Line 2" variant="outlined"
-                     value={newOrg.address2} onChange={handleFormChange} />
-        </ListItem>
-        <ListItem>
-          <TextField id="city" label="City" variant="outlined"
-                     value={newOrg.city} onChange={handleFormChange} />
-        </ListItem>
-        <ListItem>
-          <TextField id="state" label="State/Province" variant="outlined"
-                     value={newOrg.state} onChange={handleFormChange} />
-        </ListItem>
-        <ListItem>
-          <TextField id="postcode" label="Zip/Postal Code" variant="outlined"
-                     value={newOrg.postcode} onChange={handleFormChange} />
-        </ListItem>
-        <ListItem>
-          <TextField id="country" label="Country" variant="outlined"
-                     value={newOrg.country} onChange={handleFormChange} />
-        </ListItem>
-        <ListItem>
-          <Button component={Link} variant="contained" color="primary"
-                  to="/add_contact">
-            Next &gt;&gt;
-          </Button>
-        </ListItem>
-      </form>
-    </List>
+    <Grid container spacing={3}>
+      <Grid item xs={12} lg={4}>
+        <form noValidate autoComplete="off">
+          <FormGroup className={classes.root}>
+            <TextField id="name" label={nameLabel} variant="outlined"
+                       value={newOrg.name} onChange={handleFormChange} />
+          </FormGroup>
+          <FormGroup className={classes.root}>
+            <TextField id="address1" label="Address Line 1" variant="outlined"
+                       value={newOrg.address1} onChange={handleFormChange} />
+          </FormGroup>
+          <FormGroup className={classes.root}>
+            <TextField id="address2" label="Address Line 2" variant="outlined"
+                       value={newOrg.address2} onChange={handleFormChange} />
+          </FormGroup>
+          <FormGroup className={classes.root}>
+            <TextField id="city" label="City" variant="outlined"
+                       value={newOrg.city} onChange={handleFormChange} />
+          </FormGroup>
+          <FormGroup className={classes.root}>
+            <TextField id="state" label="State/Province" variant="outlined"
+                       value={newOrg.state} onChange={handleFormChange} />
+          </FormGroup>
+          <FormGroup className={classes.root}>
+            <TextField id="postcode" label="Zip/Postal Code" variant="outlined"
+                       value={newOrg.postcode} onChange={handleFormChange} />
+          </FormGroup>
+          <FormGroup className={classes.root}>
+            <TextField id="country" label="Country" variant="outlined"
+                       value={newOrg.country} onChange={handleFormChange} />
+          </FormGroup>
+          <FormGroup className={classes.root}>
+            <Button component={Link} variant="contained" color="primary"
+                    to="/add_contact">
+              Next &gt;&gt;
+            </Button>
+          </FormGroup>
+        </form>
+      </Grid>
+    </Grid>
   );
 }
